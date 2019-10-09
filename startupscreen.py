@@ -1,0 +1,1 @@
+player1 = input("Wat is uw In-game naam van player 1?")
