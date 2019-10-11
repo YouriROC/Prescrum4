@@ -19,7 +19,7 @@ SCREEN_HEIGHT = 750
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 #Name and icon
-icon = pg.image.load("images/YS.png")
+icon = pg.image.load("images/memorylogo.png")
 pg.display.set_icon(icon)
 pg.display.set_caption("Memory Game")
 
@@ -96,7 +96,7 @@ while running:
     
 
     bg_img = pg.image.load("images/background.png")  # loads image 
-    screen.blit(bg_img, (0, 0)) 
+    screen.blit(bg_img, (1, 1)) 
 
     # draw the cards
     for c in cards:
