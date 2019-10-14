@@ -75,15 +75,20 @@ cards = [Card(img) for img in card_images]
 # shuffle the card list in place
 random.shuffle(cards)
     
+
+
+
+
 # set each card's position on the screen
-horizontal_spacing = SCREEN_WIDTH // 5 # space between the 5 cards on the x axis
-vertical_spacing = SCREEN_HEIGHT // 4 # space between the 4 cards on the y axis
-margin = 80 # top and left margin
+horizontal_spacing =120
+vertical_spacing = 100
+horizontal_indent = 550
+vertical_indent = 90
+marvertical_indent = 250
+
 for i, card in enumerate(cards):
-    # loop through the cards and calculate the x and y coordinate
-    pos_x = margin + i % 5 * horizontal_spacing
-    pos_y = margin + i // 5 * vertical_spacing
-    # adjust the card's rect
+    pos_x = horizontal_indent + i % 5 * horizontal_spacing
+    pos_y = marvertical_indent + i // 5 * vertical_spacing
     card.rect.center = (pos_x, pos_y)
 
 running = True
