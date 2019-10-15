@@ -10,7 +10,7 @@ def random_color():
     return (r, g, b)
 
 
-# initialise pygame
+# initialise pg
 pg.init()
 clock = pg.time.Clock()
 
@@ -108,4 +108,69 @@ while running:
         c.draw(screen)
     
     pg.display.flip()
+   
+   
+   
+   
+    #############################################################
+    #Vanaf hier Tekst / punten / clock
     
+#variablen
+p1punten = 0
+p2punten = 0
+timer = 0
+yellow = (255, 211, 0)
+zwart = (0,0,0) 
+beurtvanplayers = ("?")
+
+#beurt player
+
+# text from here on
+X = 300;
+Y = 150;
+
+font = pg.font.Font('fonts/joystix.ttf', 20) 
+  
+# create a text suface object, 
+# on which text is drawn on it. 
+player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
+player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
+puntentext = font.render("Punten van players" , True, zwart)
+clock = font.render("Timer :" + str(timer), True, zwart)
+beurt = font.render("beurt van :" , True, zwart)
+beurtvanplayer = font.render(beurtvanplayers, True, yellow)
+# set the center of the rectangular object. 
+puntenrect = puntentext.get_rect()  
+puntenrect.center = (X // 1.8,(Y - 100) // 2)
+
+p1rect = player1.get_rect()  
+p1rect.center = (X // 1.8, Y // 2) 
+
+p2rect = player2.get_rect()  
+p2rect.center = (X // 1.8, (Y + 80) // 2) 
+
+clockrect = clock.get_rect()  
+clockrect.center = (X // 4,(Y + 1290) // 2) 
+
+beurtrect = beurt.get_rect()  
+beurtrect.center = (X // 2,(Y + 500) // 2)
+
+beurtvanplayerrect = beurtvanplayer.get_rect()  
+beurtvanplayerrect.center = (X // 2,(Y + 550) // 2)
+
+screen.blit(player1, p1rect)
+screen.blit(player2, p2rect)
+screen.blit(puntentext, puntenrect)
+screen.blit(clock, clockrect)
+screen.blit(beurt, beurtrect)
+screen.blit(beurtvanplayer,beurtvanplayerrect)
+
+pg.display.flip()
+  
+running = True
+while running:
+  for event in pg.event.get():
+    if event.type == pg.QUIT:
+      running = False
+
+#poits cointing
