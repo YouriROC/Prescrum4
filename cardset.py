@@ -206,29 +206,30 @@ while running:
     screen.blit(puntentext, puntenrect)
     screen.blit(clockFont, clockrect)
     screen.blit(beurt, beurtrect)
+    screen.blit(beurtvanplayer, beurtvanplayerrect)
 
         
     # Change turns p1 and p2
     def p1_add_point():
         global p1punten
-        global beurtvanplayer
         global player1
         global player2
+        global beurtvanplayer
         p1punten += 1
-        beurtvanplayer = "Player2"
         player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
         player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
+        beurtvanplayer = font.render(beurtvanplayers, True, yellow)
         sleep(0.50)
 
     def p2_add_point():
         global p2punten
-        global beurtvanplayer
         global player1
         global player2
+        global beurtvanplayer
         p2punten += 1
-        beurtvanplayer = "Player1"
         player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
         player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
+        beurtvanplayer = font.render(beurtvanplayers, True, yellow)
         sleep(0.50)
         
 
@@ -241,13 +242,18 @@ while running:
 
             if beurtvanplayers == "Player1":
                 p1_add_point()
-            if beurtvanplayers == "Player2":
+            elif beurtvanplayers == "Player2":
                 p2_add_point()
 
             #MAKE POINTS 
             unflip_all_cards()
         else:
+            if beurtvanplayers == "Player1":
+                beurtvanplayers = "Player2"
+            elif beurtvanplayers == "Player2":
+                beurtvanplayers = "Player1"
             unflip_all_cards()
+            beurtvanplayer = font.render(beurtvanplayers, True, yellow)
 
     for c in cards:
         c.update(mouse_pressed)
