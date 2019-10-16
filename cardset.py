@@ -25,7 +25,7 @@ clock = pg.time.Clock()
 p1punten = 0
 p2punten = 0
 timer = 0
-yellow = (255, 211, 0)
+yellow = (84, 82, 13)
 zwart = (0,0,0) 
 beurtvanplayers = ("?")
 
@@ -42,15 +42,17 @@ puntentext = font.render("Punten van players" , True, zwart)
 clockFont = font.render("Timer :" + str(timer), True, zwart)
 beurt = font.render("beurt van :" , True, zwart)
 beurtvanplayer = font.render(beurtvanplayers, True, yellow)
+
+
 # set text coords
 puntenrect = puntentext.get_rect()  
-puntenrect.center = (X // 1.8,(Y - 100) // 2)
+puntenrect.center = (X // 1.8,Y // 2)
 
 p1rect = player1.get_rect()  
-p1rect.center = (X // 1.8, Y // 2) 
+p1rect.center = (X // 1.8, (Y + 150) // 2) 
 
 p2rect = player2.get_rect()  
-p2rect.center = (X // 1.8, (Y + 80) // 2) 
+p2rect.center = (X // 1.8, (Y + 200) // 2) 
 
 clockrect = clockFont.get_rect()  
 clockrect.center = (X // 4,(Y + 1290) // 2) 
@@ -103,6 +105,8 @@ class Card():
 possible_cards = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'
 ]
+
+
 # create a bunch of card objects from the image
 cards = []
 amount_of_cards = len(possible_cards) * 2
