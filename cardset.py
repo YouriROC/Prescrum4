@@ -20,14 +20,14 @@ clock = pg.time.Clock()
  
 #############################################################
 #Vanaf hier Tekst / punten / clock
-    
-#variablen
+# Variables
 p1punten = 0
 p2punten = 0
 timer = 0
+flipsounds = 0
 yellow = (255, 211, 0)
 zwart = (0,0,0) 
-beurtvanplayers = ("?")
+beurtvanplayers = "Player1"
 
 # text settings
 X = 300
@@ -35,6 +35,16 @@ Y = 150
 
 font = pg.font.Font('fonts/joystix.ttf', 20) 
   
+# cardflip audio
+flipSound1 = pg.mixer.Sound("audio/cardflip1.wav")
+flipSound2 = pg.mixer.Sound("audio/cardflip2.wav")
+flipSound3 = pg.mixer.Sound("audio/cardflip3.wav")
+flipSound4 = pg.mixer.Sound("audio/cardflip4.wav")
+flipSound5 = pg.mixer.Sound("audio/cardflip5.wav")
+flipSound6 = pg.mixer.Sound("audio/cardflip6.wav")
+flipSound7 = pg.mixer.Sound("audio/cardflip7.wav")
+flipSound8 = pg.mixer.Sound("audio/cardflip8.wav")
+
 # set text to screen
 player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
 player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
@@ -68,6 +78,27 @@ screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 cards_flipped = []
  
+# random flipsounds
+def flipsound():
+    flipsounds = random.randint(0, 7)
+    if flipsounds == 0:
+        flipSound1.play()
+    if flipsounds == 1:
+        flipSound2.play()
+    if flipsounds == 2:
+        flipSound3.play()
+    if flipsounds == 3:
+        flipSound4.play()
+    if flipsounds == 4:
+        flipSound5.play()
+    if flipsounds == 5:
+        flipSound6.play()
+    if flipsounds == 6:
+        flipSound7.play()
+    if flipsounds == 7:
+        flipSound8.play()
+
+
 # make a card class
 class Card():
     def __init__(self, image, letter):
@@ -85,6 +116,8 @@ class Card():
             if self.rect.collidepoint(mpos):
                 if self.flipped == False:
                     self.flipped = True
+                    global flipSound1
+                    flipsound()
                     global cards_flipped
                     cards_flipped.append(self)
  
@@ -128,7 +161,7 @@ for i in range(0, amount_of_cards):
 cardback = pg.image.load('images/cards/card_back.png')
  
 # shuffle the card list in place
-random.shuffle(cards)
+# random.shuffle(cards)
    
 # set each card's position on the screen
 horizontal_spacing = 150
@@ -140,7 +173,6 @@ marvertical_indent = 100
 def unflip_all_cards():
     sleep(1.30)
     global cards_flipped
-
     for c in cards_flipped:
         c.flipped = False
 
@@ -164,6 +196,7 @@ while running:
             
    
     clock.tick(30)
+    screen.fill(zwart)
    
     bg_img = pg.image.load("images/background.png")  # loads image
 
@@ -173,12 +206,48 @@ while running:
     screen.blit(puntentext, puntenrect)
     screen.blit(clockFont, clockrect)
     screen.blit(beurt, beurtrect)
-    screen.blit(beurtvanplayer,beurtvanplayerrect)
 
-   
+        
+    # Change turns p1 and p2
+    def p1_add_point():
+        global p1punten
+        global beurtvanplayer
+        global player1
+        global player2
+        p1punten += 1
+        beurtvanplayer = "Player2"
+        player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
+        player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
+        sleep(0.50)
+
+    def p2_add_point():
+        global p2punten
+        global beurtvanplayer
+        global player1
+        global player2
+        p2punten += 1
+        beurtvanplayer = "Player1"
+        player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
+        player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
+        sleep(0.50)
+        
+
+
     # Unflip
     if(len(cards_flipped) >= 2):
-        unflip_all_cards()
+        if(cards_flipped[0].letter == cards_flipped[1].letter):
+            cards.remove(cards_flipped[0])
+            cards.remove(cards_flipped[1])
+
+            if beurtvanplayers == "Player1":
+                p1_add_point()
+            if beurtvanplayers == "Player2":
+                p2_add_point()
+
+            #MAKE POINTS 
+            unflip_all_cards()
+        else:
+            unflip_all_cards()
 
     for c in cards:
         c.update(mouse_pressed)
@@ -187,4 +256,3 @@ while running:
     pg.display.flip()
 
 pg.quit()
-
