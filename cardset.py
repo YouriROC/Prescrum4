@@ -70,10 +70,10 @@ p2rect.center = (X // 1.8, (Y + 150) // 2)
 #clockrect.center = (X // 4,(Y + 1290) // 2) 
 
 beurtrect = beurt.get_rect()  
-beurtrect.center = (X // 2,(Y + 500) // 2)
+beurtrect.center = (X // 1.8,(Y + 200) // 2)
 
 beurtvanplayerrect = beurtvanplayer.get_rect()  
-beurtvanplayerrect.center = (X // 2,(Y + 550) // 2)
+beurtvanplayerrect.center = (X // 2,(Y + 250) // 2)
 
 
 SCREEN_WIDTH = 1450
