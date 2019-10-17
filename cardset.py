@@ -39,7 +39,7 @@ font = pg.font.Font('fonts/joystix.ttf', 20)
 player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
 player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
 puntentext = font.render("Punten van players" , True, zwart)
-clockFont = font.render("Timer :" + str(timer), True, zwart)
+#clockFont = font.render("Timer :" + str(timer), True, zwart)
 beurt = font.render("beurt van :" , True, zwart)
 beurtvanplayer = font.render(beurtvanplayers, True, yellow)
 
@@ -54,8 +54,8 @@ p1rect.center = (X // 1.8, (Y + 150) // 2)
 p2rect = player2.get_rect()  
 p2rect.center = (X // 1.8, (Y + 200) // 2) 
 
-clockrect = clockFont.get_rect()  
-clockrect.center = (X // 4,(Y + 1290) // 2) 
+#clockrect = clockFont.get_rect()  
+#clockrect.center = (X // 4,(Y + 1290) // 2) 
 
 beurtrect = beurt.get_rect()  
 beurtrect.center = (X // 2,(Y + 500) // 2)
@@ -175,7 +175,7 @@ while running:
     screen.blit(player1, p1rect)
     screen.blit(player2, p2rect)
     screen.blit(puntentext, puntenrect)
-    screen.blit(clockFont, clockrect)
+    #screen.blit(clockFont, clockrect)
     screen.blit(beurt, beurtrect)
     screen.blit(beurtvanplayer,beurtvanplayerrect)
 
