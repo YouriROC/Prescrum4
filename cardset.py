@@ -26,7 +26,7 @@ p2punten = 0
 ptotalpunten = 0
 timer = 0
 flipsounds = 0
-yellow = (255, 211, 0)
+yellow = (87, 80, 0)
 red = (255, 0, 0)
 blue = (0, 0, 255)
 zwart = (0,0,0) 
@@ -55,16 +55,16 @@ player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
 puntentext = font.render("Punten van players" , True, zwart)
 #clockFont = font.render("Timer :" + str(timer), True, zwart)
 beurt = font.render("beurt van :" , True, zwart)
-beurtvanplayer = font.render(beurtvanplayers, True, yellow)
+beurtvanplayer = font.render(beurtvanplayers, True, blue)
 # set text coords
 puntenrect = puntentext.get_rect()  
-puntenrect.center = (X // 1.8,(Y - 100) // 2)
+puntenrect.center = (X // 1.8, Y // 2)
 
 p1rect = player1.get_rect()  
-p1rect.center = (X // 1.8, Y // 2) 
+p1rect.center = (X // 1.8, (Y + 100) // 2) 
 
 p2rect = player2.get_rect()  
-p2rect.center = (X // 1.8, (Y + 80) // 2) 
+p2rect.center = (X // 1.8, (Y + 150) // 2) 
 
 #clockrect = clockFont.get_rect()  
 #clockrect.center = (X // 4,(Y + 1290) // 2) 
@@ -224,7 +224,7 @@ while running:
         ptotalpunten += 1
         player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
         player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
-        beurtvanplayer = font.render(beurtvanplayers, True, yellow)
+        beurtvanplayer = font.render(beurtvanplayers, True, blue)
         sleep(0.50)
 
     def p2_add_point():
@@ -237,7 +237,7 @@ while running:
         ptotalpunten += 1
         player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
         player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
-        beurtvanplayer = font.render(beurtvanplayers, True, yellow)
+        beurtvanplayer = font.render(beurtvanplayers, True, red)
         sleep(0.50)
         
             
@@ -259,10 +259,11 @@ while running:
         else:
             if beurtvanplayers == "Player1":
                 beurtvanplayers = "Player2"
+                beurtvanplayer = font.render(beurtvanplayers, True, red)
             elif beurtvanplayers == "Player2":
                 beurtvanplayers = "Player1"
+                beurtvanplayer = font.render(beurtvanplayers, True, blue)
             unflip_all_cards()
-            beurtvanplayer = font.render(beurtvanplayers, True, yellow)
     
     if ptotalpunten >= 10:
         if p1punten == p2punten:
