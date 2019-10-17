@@ -280,7 +280,7 @@ while running:
             win_img = pg.image.load("images/winscreen.png")
             screen.blit(win_img, (1, 1))
 
-            p1winner = winfont.render("Player 1 heeft gewonnen!", True, yellow)
+            p1winner = winfont.render("Player 1 heeft gewonnen!", True, blue)
             p1winnerrect = p1winner.get_rect()  
             p1winnerrect.center = (X // 100, (Y + 45) // 50)
             screen.blit(p1winner, (400, 475))
@@ -289,7 +289,7 @@ while running:
             win_img = pg.image.load("images/winscreen.png")
             screen.blit(win_img, (1, 1))
 
-            p2winner = winfont.render("Player 2 heeft gewonnen!", True, yellow)
+            p2winner = winfont.render("Player 2 heeft gewonnen!", True, red)
             p2winnerrect = p2winner.get_rect()  
             p2winnerrect.center = (X // 100, (Y + 45) // 50)
             screen.blit(p2winner, (400, 475))
