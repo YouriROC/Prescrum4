@@ -23,9 +23,12 @@ clock = pg.time.Clock()
 # Variables
 p1punten = 0
 p2punten = 0
+ptotalpunten = 0
 timer = 0
 flipsounds = 0
 yellow = (255, 211, 0)
+red = (255, 0, 0)
+blue = (0, 0, 255)
 zwart = (0,0,0) 
 beurtvanplayers = "Player1"
 
@@ -33,7 +36,8 @@ beurtvanplayers = "Player1"
 X = 300
 Y = 150
 
-font = pg.font.Font('fonts/joystix.ttf', 20) 
+font = pg.font.Font('fonts/joystix.ttf', 20)
+winfont = pg.font.Font('fonts/joystix.ttf', 40) 
   
 # cardflip audio
 flipSound1 = pg.mixer.Sound("audio/cardflip1.wav")
@@ -161,7 +165,7 @@ for i in range(0, amount_of_cards):
 cardback = pg.image.load('images/cards/card_back.png')
  
 # shuffle the card list in place
-# random.shuffle(cards)
+#random.shuffle(cards)
    
 # set each card's position on the screen
 horizontal_spacing = 150
@@ -212,10 +216,12 @@ while running:
     # Change turns p1 and p2
     def p1_add_point():
         global p1punten
+        global ptotalpunten
         global player1
         global player2
         global beurtvanplayer
         p1punten += 1
+        ptotalpunten += 1
         player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
         player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
         beurtvanplayer = font.render(beurtvanplayers, True, yellow)
@@ -223,15 +229,18 @@ while running:
 
     def p2_add_point():
         global p2punten
+        global ptotalpunten
         global player1
         global player2
         global beurtvanplayer
         p2punten += 1
+        ptotalpunten += 1
         player1 = font.render("Player1's points:" + str(p1punten) , True, yellow)
         player2 = font.render("Player2's points:" + str(p2punten) , True, yellow)
         beurtvanplayer = font.render(beurtvanplayers, True, yellow)
         sleep(0.50)
         
+            
 
 
     # Unflip
@@ -254,6 +263,41 @@ while running:
                 beurtvanplayers = "Player1"
             unflip_all_cards()
             beurtvanplayer = font.render(beurtvanplayers, True, yellow)
+    
+    if ptotalpunten >= 10:
+        if p1punten == p2punten:
+                win_img = pg.image.load("images/winscreen.png")
+                screen.blit(win_img, (1, 1))
+
+                tiewinner = winfont.render("Gelijkspel!", True, yellow)
+                tiewinnerrect = tiewinner.get_rect()  
+                tiewinnerrect.center = (X // 100, (Y + 45) // 50)
+                screen.blit(tiewinner, (520, 475))
+
+
+        elif p1punten >= p2punten:
+            win_img = pg.image.load("images/winscreen.png")
+            screen.blit(win_img, (1, 1))
+
+            p1winner = winfont.render("Player 1 heeft gewonnen!", True, yellow)
+            p1winnerrect = p1winner.get_rect()  
+            p1winnerrect.center = (X // 100, (Y + 45) // 50)
+            screen.blit(p1winner, (400, 475))
+
+        elif p2punten >= p1punten:
+            win_img = pg.image.load("images/winscreen.png")
+            screen.blit(win_img, (1, 1))
+
+            p2winner = winfont.render("Player 2 heeft gewonnen!", True, yellow)
+            p2winnerrect = p2winner.get_rect()  
+            p2winnerrect.center = (X // 100, (Y + 45) // 50)
+            screen.blit(p2winner, (400, 475))
+
+        fireworks = [pg.image.load('images/FW1.png'), pg.image.load('images/FW2.png'), pg.image.load('images/FW3.png'), pg.image.load('images/FW4.png'), pg.image.load('images/FW5.png'), pg.image.load('images/FW6.png'), pg.image.load('images/FW7.png'), pg.image.load('images/FW8.png')]
+
+    
+
+    
 
     for c in cards:
         c.update(mouse_pressed)
