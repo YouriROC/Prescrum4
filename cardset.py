@@ -4,7 +4,10 @@ import random
 
 from time import sleep
 
- 
+logo = pg.image.load('images/memorylogo.png')
+pg.display.set_icon(logo)
+caption = "Memory Game door Youri en Ronan"
+pg.display.set_caption(caption)
  
 def random_color():
     # return a random RGB value
@@ -165,7 +168,7 @@ for i in range(0, amount_of_cards):
 cardback = pg.image.load('images/cards/card_back.png')
  
 # shuffle the card list in place
-#random.shuffle(cards)
+random.shuffle(cards)
    
 # set each card's position on the screen
 horizontal_spacing = 150
